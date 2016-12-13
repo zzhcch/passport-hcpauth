@@ -1,0 +1,35 @@
+{
+    "name": "passport-hcpauth",
+    "version": "1.0.0",
+    "description": "use for Hcp-Auth-Tool",
+    "main": "./lib",
+    "maintainers": [{
+        "name": "Osborn Zhang",
+        "email": "osborn.zhang@innocellence.com"
+    }],
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": {
+        "name": "Osborn Zhang",
+        "email": "Osborn.zhang@innocellence.com"
+    },
+    "bugs": {
+        "url": "https://github.com/zzhcch/passport-hcpauth/issues"
+    },
+    "dependencies": {
+        "passport-oauth2": "1.x.x"
+    },
+    "devDependencies": {
+        "chai": "2.x.x",
+        "chai-passport-strategy": "1.x.x",
+        "make-node": "0.3.x",
+        "mocha": "1.x.x",
+        "proxyquire": "1.4.x"
+    },
+    "engines": {
+        "node": ">= 0.4.0"
+    },
+    "homepage": "https://github.com/zzhcch/passport-hcpauth#readme",
+    "license": "MIT"
+}
