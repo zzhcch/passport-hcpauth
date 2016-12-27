@@ -15,17 +15,22 @@ $ npm install passport-hcpAuth
 ## Usage
 ### noraml:
 ```js
+var passport = var passport = require('passport');
 var HcpStrategy = require('passport-hcpAuth').Strategy;
 
 passport.use(new HcpStrategy({
-    clientID: CLIENT_ID,
-    clientSecret: CLIENT_SECRET,
-    callbackURL: "http://127.0.0.1:3000/auth/hcp/callback"
+    clientID: config.clientID,
+    clientSecret: config.clientSecret,
+    base: config.environmentUrl,
+    authorizationURL: config.authorizeUrl,
+    tokenURL: config.tokenUrl,
+    callbackURL: config.callBackUrl,//("http://127.0.0.1:3000/auth/hcp/callback")
+    _profileURL: config.profileUrl
   },
   function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({ id: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
+    fetch_user(config.profileUrl, accessToken).then(function (obj) {
+          return cb(null,  obj);
+      });
   }
 ));
 ```
@@ -39,15 +44,29 @@ For example, as route middleware in an [Express](http://expressjs.com/)
 application:
 
 ```js
-app.get('/auth/hcpAuth',
-  passport.authenticate('hcpAuth'));
 
-app.get('/auth/hcpAuth/callback', 
-  passport.authenticate('hcpAuth', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
+app.get('/auth/hcp',function(req, res, next){
+      if (req.query.redirect) {
+        req.session.authRedirect = req.query.redirect;
+      }
+      passport.authenticate('hcp')(req, res, next);
+    });
+
+app.get('/auth/hcp/callback', function (req, res) {
+      var redirect = function () {
+        var _redirect = req.session.authRedirect;
+        if (_redirect) {
+          delete req.session.authRedirect;
+        }
+        return res.status(303).location(_redirect || '/').end();
+      };
+
+      // Successful authentication, redirect home.
+      passport.authenticate('hcp', function (err, user) {
+          return redirect();
+      })(req, res);
+    });
+
 ```
 
 ### In loopBack:
