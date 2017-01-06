@@ -1,10 +1,12 @@
 # passport-hcpAuth
 
 
-[Passport](http://passportjs.org/) strategy for authenticating with Hcp-Auth-Tool(internal) 
+[Passport](http://passportjs.org/) strategy for authenticating with Hcp-Auth-Tool(internal)
 using the OAuth 2.0 API.
 
 This module lets you authenticate using Hcp-Auth-Tool in your Node.js applications.
+
+### Many thanks to Tony qian's big contribution!
 
 ## Install
 
@@ -143,5 +145,4 @@ then it works
 
 [The MIT License](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2016 Osborn zhang 
-
+Copyright (c) 2016 Osborn zhang
