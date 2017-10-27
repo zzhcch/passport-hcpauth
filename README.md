@@ -11,7 +11,7 @@ This module lets you authenticate using Hcp-Auth-Tool in your Node.js applicatio
 ## Install
 
 ```bash
-$ npm install passport-hcpAuth
+$ npm install passport-hcpauth
 ```
 
 ## Usage
